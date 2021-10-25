@@ -52,6 +52,11 @@ def query_package(module, pkg, state):
   if local_check_rc != 0:
     return False, False, False
 
+  # No need to check for the repo version in some situations
+  # Indicate the package is out-of-date, because we chose not to check
+  if state == 'present' or state == 'absent':
+    return True, False, False
+
   local_version = get_version(local_check_stdout)
 
   repo_check_cmd = 'yay -Si %s' % pkg
