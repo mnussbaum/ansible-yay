@@ -102,7 +102,12 @@ def upgrade(module):
 def get_sudo_user(module):
   # ansible sets the SUDO_USER environment variable.  Default to using this,
   # checking USER and then `logname` as backups.
-  user = os.environ.get('SUDO_USER') or os.environ.get('USER')
+  user = os.environ.get('SUDO_USER')
+
+  # If ansible is run as root with become_user set, use the specified user
+  # instead of root.
+  if not user or user == 'root':
+    user = os.environ.get('USER')
 
   if not user:
     rc, stdout, _ = module.run_command('logname', check_rc=True)
