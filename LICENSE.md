@@ -1,6 +1,7 @@
 # The MIT License (MIT)
 
-Copyright (c) 2018 Michael Nussbaum
+Copyright (c) 2022 Michael Nussbaum
+Copyright (c) 2014 Austin Hyde
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
