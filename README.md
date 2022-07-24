@@ -12,12 +12,10 @@ This assumes your target node already has yay and its dependecies installed.
 
 ## Installation
 
-You can install this role with
-[`ansible-galaxy`](https://galaxy.ansible.com/intro). Check out the
-`ansible-galaxy` docs for all the different ways you can install roles, but the
-simplest is just:
-
-    $ ansible-galaxy install mnussbaum.ansible-yay
+1. Clone this repo
+2. Copy or link the `yay` file into your global Ansible library (usually
+   `/usr/share/ansible`) or into the `./library` folder alongside your
+   top-level playbook
 
 ## Usage
 
