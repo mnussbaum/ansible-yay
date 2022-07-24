@@ -1,0 +1,26 @@
+namespace: mnussbaum
+name: ansible_yay
+version: 1.0.0
+readme: README.md
+authors:
+  - mnussbaum <michaelnussbaum08@gmail.com>
+
+description: >
+  An Ansible module for installing Arch Linux User Repository (AUR) packages
+  via the yay AUR helper
+
+license_file: LICENSE.md
+
+# A list of tags you want to associate with the collection for indexing/searching. A tag name has the same character
+# requirements as 'namespace' and 'name'
+tags:
+  - aur
+  - arch_user_repository
+  - arch
+  - archlinux
+  - arch_linux
+  - packaging
+
+dependencies: {}
+repository: https://github.com/mnussbaum/ansible-yay
+issues: https://github.com/mnussbaum/ansible-yay/issues
