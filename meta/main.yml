@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: mnussbaum <michaelnussbaum08@gmail.com>
+  description: >
+    An Ansible module for installing Arch Linux User Repository (AUR) packages
+    via the yay AUR helper
+  license_file: LICENSE.md
+  min_ansible_version: 2.9.10
+  platforms:
+    - name: ArchLinux
+      versions:
+        - all
+  galaxy_tags:
+    - aur
+    - arch_user_repository
+    - arch
+    - archlinux
+    - arch_linux
+    - packaging
+
+dependencies: []
