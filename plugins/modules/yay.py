@@ -22,6 +22,93 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+DOCUMENTATION = r'''
+---
+module: yay
+short_description: Manage AUR packages with the yay helper
+description:
+  - Install, upgrade, and remove Arch Linux User Repository (AUR) packages
+    using the C(yay) AUR helper.
+  - Assumes the target node already has C(yay) and its dependencies installed.
+author:
+  - Austin Hyde (@austinhyde)
+  - Michael Nussbaum (@mnussbaum)
+requirements:
+  - yay
+  - pacman
+options:
+  name:
+    description:
+      - Name or list of names of the AUR package(s) to install, upgrade, or
+        remove.
+    type: list
+    elements: str
+  state:
+    description:
+      - Whether the package(s) should be installed (V(present)), installed and
+        upgraded to the latest version (V(latest)), or removed (V(absent)).
+    type: str
+    choices: [absent, present, latest]
+    default: present
+  recurse:
+    description:
+      - When removing packages, also remove dependencies that are no longer
+        required (equivalent to C(pacman -Rs)).
+    type: bool
+    default: false
+  upgrade:
+    description:
+      - Whether to upgrade the whole system (equivalent to C(yay -Su)).
+    type: bool
+    default: false
+  update_cache:
+    description:
+      - Whether to refresh the package databases before the operation
+        (equivalent to C(yay -Sy)).
+    type: bool
+    default: false
+    aliases: [update-cache]
+'''
+
+EXAMPLES = r'''
+- name: Install package foo
+  mnussbaum.ansible_yay.yay:
+    name: foo
+    state: present
+
+- name: Ensure fuzz is installed and up to date
+  mnussbaum.ansible_yay.yay:
+    name: fuzz
+    state: latest
+
+- name: Remove packages foo and bar
+  mnussbaum.ansible_yay.yay:
+    name:
+      - foo
+      - bar
+    state: absent
+
+- name: Recursively remove package baz
+  mnussbaum.ansible_yay.yay:
+    name: baz
+    state: absent
+    recurse: true
+
+- name: Refresh the package databases and upgrade the system (yay -Syu)
+  mnussbaum.ansible_yay.yay:
+    update_cache: true
+    upgrade: true
+'''
+
+RETURN = r'''
+msg:
+  description: Human-readable summary of the actions that were performed.
+  returned: always
+  type: str
+  sample: Installed 1 package(s).
+'''
+
+
 def yay_in_path(module):
   rc, _, _ = module.run_command('which yay', check_rc=False)
   return rc == 0
