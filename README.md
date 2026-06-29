@@ -12,10 +12,16 @@ This assumes your target node already has yay and its dependecies installed.
 
 ## Installation
 
-1. Clone this repo
-2. Copy or link the `yay` file into your global Ansible library (usually
-   `/usr/share/ansible`) or into the `./library` folder alongside your
-   top-level playbook
+Install the collection from Ansible Galaxy:
+
+    $ ansible-galaxy collection install mnussbaum.ansible_yay
+
+Or install the latest development version straight from GitHub:
+
+    $ ansible-galaxy collection install git+https://github.com/mnussbaum/ansible-yay.git
+
+The module is then available under its fully qualified collection name,
+`mnussbaum.ansible_yay.yay` (see Usage below).
 
 ## Usage
 
@@ -37,19 +43,19 @@ respectively).
 
 ```yaml
 # Install package foo
-- yay: name=foo state=present
+- mnussbaum.ansible_yay.yay: name=foo state=present
 
 # Ensure package fuzz is installed and up-to-date
-- yay: name=fuzz state=latest
+- mnussbaum.ansible_yay.yay: name=fuzz state=latest
 
 # Remove packages foo and bar
-- yay: name=foo,bar state=absent
+- mnussbaum.ansible_yay.yay: name=foo,bar state=absent
 
 # Recursively remove package baz
-- yay: name=baz state=absent recurse=yes
+- mnussbaum.ansible_yay.yay: name=baz state=absent recurse=yes
 
 # Effectively run yay -Syu
-- yay: update_cache=yes upgrade=yes
+- mnussbaum.ansible_yay.yay: update_cache=yes upgrade=yes
 ```
 
 [yay]: https://github.com/Jguer/yay
